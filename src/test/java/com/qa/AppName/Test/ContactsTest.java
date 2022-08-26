@@ -1,0 +1,7 @@
+package com.qa.AppName.Test;
+
+import com.qa.AppName.Base.BaseTest;
+
+public class ContactsTest extends BaseTest {
+
+}

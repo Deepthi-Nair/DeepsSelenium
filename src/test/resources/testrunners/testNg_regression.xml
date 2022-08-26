@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Regression Suite" verbose="5" thread-count="3"
+parallel="tests">
+<listeners>
+		<listener
+			class-name="com.qa.AppName.TestListeners.AnnotationTransformer" />
+	<!--	<listener
+			class-name="com.qa.AppName.TestListeners.ExtentReportListener" />-->
+		<listener
+			class-name="com.qa.AppName.TestListeners.TestAllureListener" />
+	</listeners>
+<!-- Test -->
+
+	<test name=" Open cart Login Test">
+		
+
+		<classes>
+			<class name="com.qa.AppName.Test.LoginPageTest" />
+		</classes>
+	</test> <!-- Test -->
+
+	<test name="Open Cart  Accounts Test">
+		
+		<classes>
+			<class name="com.qa.AppName.Test.AccountPageTest" />
+		</classes>
+	</test> <!-- Test -->
+	
+<test name="Open Cart  Product Info Test">
+		
+		<classes>
+			<class name="com.qa.AppName.Test.ProductInfoTest" />
+		</classes>
+	</test> <!-- Test -->
+
+ <!--
+	<test name="Open Cart  Registration Test">
+		
+		<classes>
+			<class name="com.qa.AppName.Test.RegisterTest" />
+		</classes>
+	</test>  
+	 --> 
+	
+
+
+
+
+</suite> <!-- Suite -->
