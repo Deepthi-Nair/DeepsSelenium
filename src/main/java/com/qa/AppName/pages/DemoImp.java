@@ -7,7 +7,7 @@ public class DemoImp {
 		String check="git";
  int a= 10;
  int b=20;
- String ="disucussed to resolve conflict";
+ String s ="disucussed to resolve conflict";
 		 
 	}
 
