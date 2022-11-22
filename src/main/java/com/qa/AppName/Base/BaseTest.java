@@ -5,6 +5,7 @@ import java.util.Properties;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Parameters;
 import org.testng.asserts.SoftAssert;
 
 import com.qa.AppName.Factory.DriverFactory;
@@ -26,13 +27,19 @@ public class BaseTest {
 	public ProductInfoPage prodinfo;
 	public SoftAssert softassert;
 	
-	
+	@Parameters({"browser","browserversion"})
 	@BeforeTest
-	public void setup() throws InterruptedException { 
+	public void setup(String browser, String browserversion) throws InterruptedException { 
 		
 		df= new DriverFactory();
 		prop=df.init_prop();
 		driver=df.init_driver(prop);
+		if (browser!=null)
+		{
+			prop.setProperty("browser",browser);
+			prop.setProperty("browserversion", browserversion);
+		}
+		
 	    lp= new LoginPage(driver);
 		rp=new Register(driver);
 		ap=new AccountsPage(driver);

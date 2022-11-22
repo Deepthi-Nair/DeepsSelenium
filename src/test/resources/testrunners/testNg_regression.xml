@@ -13,7 +13,8 @@ parallel="tests">
 <!-- Test -->
 
 	<test name=" Open cart Login Test">
-		
+		<parameter name = "browser" value ="chrome"/>
+		<parameter name = "browserversion" value ="89"/>
 
 		<classes>
 			<class name="com.qa.AppName.Test.LoginPageTest" />

@@ -36,6 +36,7 @@ public class DriverFactory {
 	{
 		
 		String browser=prop.getProperty("browser");
+		String browserversion=prop.getProperty("browserversion").trim();
 		System.out.println("Browser Name is : "+browser);
 		highlight=prop.getProperty("highlight");
 		Drawborder=prop.getProperty("DrawBorder");
@@ -49,7 +50,7 @@ public class DriverFactory {
 			if(Boolean.parseBoolean(prop.getProperty("remote")))
 			{
 				//remote browser
-				init_remoteDriver("chrome");
+				init_remoteDriver("chrome","89");
 			}
 			else
 			{
@@ -62,7 +63,16 @@ public class DriverFactory {
 		{
 			WebDriverManager.firefoxdriver().setup();
 			//driver=new FirefoxDriver(optionsnmanager.getfirefoxOptions());
-			tDriver.set(new FirefoxDriver(optionsnmanager.getChromeOptions()));
+			if(Boolean.parseBoolean(prop.getProperty("remote")))
+			{
+				//remote browser
+				init_remoteDriver("firefox","53");
+			}
+			else
+			{
+				//runs local browser
+			tDriver.set(new FirefoxDriver(optionsnmanager.getfirefoxOptions()));
+		}
 		}
 		else if (browser.equalsIgnoreCase("safari"))
 		{
@@ -85,16 +95,18 @@ public class DriverFactory {
 	}
 	
 	
-	private void init_remoteDriver(String browser) {
+	private void init_remoteDriver(String browser,String browserversion) {
 		// TODO Auto-generated method stub
 		System.out.println("Running test on remote grid server:  "+browser);
 		if (browser.equalsIgnoreCase("chrome"))
 		{
 			//DesiredCapabilities.this.setCapability(ChromeOptions.CAPABILITY, optionsnmanager.getChromeOptions());
 			DesiredCapabilities cap= new DesiredCapabilities();
-			cap.setBrowserName("chrome");
+			cap.setCapability("browserName","chrome");
+			cap.setCapability(browserversion, prop.getProperty("browserversion"));
+			cap.setCapability("enableVNC", true);
 			//ChromeOptions chromeOp=new ChromeOptions();
-			//chromeOp.setCapability(ChromeOptions.CAPABILITY, optionsnmanager.getChromeOptions());
+			cap.setCapability(ChromeOptions.CAPABILITY, optionsnmanager.getChromeOptions());
 			try {
 				tDriver.set(new RemoteWebDriver(new URL(prop.getProperty("huburl")), cap));
 			} catch (MalformedURLException e) {
@@ -111,7 +123,7 @@ public class DriverFactory {
 			cap.setBrowserName("firefox");
 			
 			//FirefoxOptions ffOp= new FirefoxOptions();
-			//ffOp.setCapability(ChromeOptions.CAPABILITY, optionsnmanager.getfirefoxOptions());
+			cap.setCapability(ChromeOptions.CAPABILITY, optionsnmanager.getfirefoxOptions());
 			try {
 				tDriver.set(new RemoteWebDriver(new URL(prop.getProperty("huburl")), cap));
 			} catch (MalformedURLException e) {
